@@ -10,7 +10,11 @@
         Gestione Piante - Plant Nursery
       </h1>
 
-      <a class="btn btn-light border my-3" th:href="@{/plants/create}">
+      <a
+        sec:authorize="hasAuthority('ADMIN')"
+        class="btn btn-light border my-3"
+        th:href="@{/plants/create}"
+      >
         Nuova Pianta
       </a>
 
@@ -29,6 +33,7 @@
                 Mostra
               </a>
               <a
+                sec:authorize="hasAuthority('ADMIN')"
                 class="btn btn-warning border"
                 th:href="@{/plants/update/{slug}(slug=${plant.slug})}"
               >
@@ -36,6 +41,7 @@
               </a>
 
               <form
+                sec:authorize="hasAuthority('ADMIN')"
                 action="#"
                 th:action="@{'/plants/delete/{slug}' (slug=${plant.slug})}"
                 method="post"
@@ -46,6 +52,13 @@
           </li>
         </ul>
       </div>
+      <div class="card-footer text-center">
+        <a href="/" class="btn btn-outline-success mt-4">
+          <i class="bi bi-arrow-left"></i> Torna alla Home
+        </a>
+      </div>
     </div>
+
+    <th:block th:insert="fragments/head :: common-links"></th:block>
   </body>
 </html>
