@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Nuova Pianta - Plant Nursery
+      </h1>
+
+      <div class="container">
+        <main class="container my-3">
+          <form
+            id="plant-form"
+            th:object="${plant}"
+            th:action="@{/plants/create}"
+            method="post"
+          >
+            <!-- Nome Pianta -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Nome della pianta</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                th:field="*{name}"
+                placeholder="Es. Rosa Rampicante"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('name')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('name')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Nome Scientifico -->
+            <div class="mb-3">
+              <label for="scientificName" class="form-label"
+                >Nome Scientifico della pianta</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="scientificName"
+                th:field="*{scientificName}"
+                placeholder="Es. Rosa climbing"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('scientificName')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('scientificName')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- URL Immagine -->
+            <div class="mb-3">
+              <label for="imageURL" class="form-label">URL dell'immagine</label>
+              <input
+                type="url"
+                class="form-control"
+                id="imageURL"
+                th:field="*{imageURL}"
+                placeholder="https://esempio.com/pianta.jpg"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('imageURL')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('imageURL')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Prezzo -->
+            <div class="mb-3">
+              <label for="price" class="form-label">Prezzo (€)</label>
+              <div class="input-group">
+                <span class="input-group-text">€</span>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="price"
+                  th:field="*{price}"
+                  step="0.01"
+                  min="0"
+                  placeholder="15.99"
+                  th:errorClass="is-invalid"
+                />
+              </div>
+              <div
+                th:if="${#fields.hasErrors('price')}"
+                class="invalid-feedback d-block"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('price')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Descrizione -->
+            <div class="mb-3">
+              <label for="description" class="form-label">Descrizione</label>
+              <textarea
+                class="form-control"
+                id="description"
+                th:field="*{description}"
+                rows="4"
+                placeholder="Descrivi le caratteristiche della pianta, cure necessarie, periodo di fioritura..."
+                th:errorClass="is-invalid"
+              ></textarea>
+              <div
+                th:if="${#fields.hasErrors('description')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('description')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Altezza Massima -->
+            <div class="mb-3">
+              <label for="maximumHeight" class="form-label"
+                >Altezza Massima</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="maximumHeight"
+                th:field="*{maximumHeight}"
+                placeholder="Es. 40-60 cm, 2-4 metri"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('maximumHeight')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('maximumHeight')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Pulsanti -->
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a href="/plants" class="btn btn-outline-secondary me-md-2">
+                <i class="bi bi-arrow-left"></i> Annulla
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Salva Pianta
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

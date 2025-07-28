@@ -22,8 +22,7 @@ public class Plant implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank
-    @Column(name = "slug")
+    @Column(name = "slug", nullable = false, unique = true)
     @Size(max = 100)
     private String slug;
 

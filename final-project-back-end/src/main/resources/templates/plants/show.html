@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Gestione Piante - Plant Nursery
+      </h1>
+
+      <div th:object="${plant}" class="container">
+        <div class="card shadow-lg">
+          <!-- Header della card -->
+          <div class="card-header bg-success text-white text-center">
+            <h2 class="mb-1" th:text="*{name}"></h2>
+            <h6 class="fst-italic opacity-75" th:text="*{scientificName}"></h6>
+          </div>
+
+          <div class="card-body">
+            <div class="row">
+              <!-- Colonna sinistra: Info -->
+              <div class="col-lg-6">
+                <div class="mb-4">
+                  <h5 class="text-success mb-3">
+                    <i class="bi bi-info-circle"></i> Descrizione
+                  </h5>
+                  <p class="lead" th:text="*{description}"></p>
+                </div>
+
+                <div class="mb-4">
+                  <h6 class="text-muted">
+                    <i class="bi bi-rulers"></i> Altezza massima
+                  </h6>
+                  <span
+                    class="badge bg-light text-dark fs-6"
+                    th:text="*{maximumHeight}"
+                  ></span>
+                </div>
+
+                <div class="mb-4">
+                  <h6 class="text-muted">
+                    <i class="bi bi-currency-euro"></i> Prezzo
+                  </h6>
+                  <h4 class="text-success fw-bold">
+                    €<span th:text="*{price}"></span>
+                  </h4>
+                </div>
+              </div>
+
+              <!-- Colonna destra: Immagine -->
+              <div class="col-lg-6 text-center">
+                <div class="position-relative">
+                  <img
+                    th:src="*{imageURL}"
+                    th:alt="*{name}"
+                    class="img-fluid rounded shadow"
+                    style="max-height: 400px; object-fit: cover; width: 100%"
+                    onerror="this.src='https://via.placeholder.com/400x300/28a745/ffffff?text=Immagine+Non+Disponibile'"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer bg-light text-center">
+            <a href="/plants" class="btn btn-outline-success">
+              <i class="bi bi-arrow-left"></i> Torna alla lista
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -18,4 +18,26 @@ public class PlantService {
         return plantRepository.findAll();
     }
 
+    public Plant findBySlug(String slug) {
+        return plantRepository.findBySlug(slug);
+    }
+
+    public Plant create(Plant plant) {
+        return plantRepository.save(plant);
+    }
+
+    public Plant update(Plant plant) {
+        return plantRepository.save(plant);
+    }
+
+    public void delete(Plant plant) {
+        plantRepository.delete(plant);
+    }
+
+    public String generateSlug(String name) {
+        return name.toLowerCase()
+                .replaceAll("[^a-z0-9\\s]", "")
+                .replaceAll("\\s+", "-");
+    }
+
 }
