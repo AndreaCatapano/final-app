@@ -2,12 +2,17 @@ package com.andreacatapano.finalproject.final_project_back_end.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -51,6 +56,10 @@ public class Plant implements Serializable {
     @Column(name = "altezza_max")
     @Size(max = 50)
     private String maximumHeight;
+
+    @OneToMany(mappedBy = "plant", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Treatment> treaments;
 
     public Plant() {
     }
@@ -117,6 +126,14 @@ public class Plant implements Serializable {
 
     public void setMaximumHeight(String maximumHeight) {
         this.maximumHeight = maximumHeight;
+    }
+
+    public List<Treatment> getTreaments() {
+        return treaments;
+    }
+
+    public void setTreaments(List<Treatment> treaments) {
+        this.treaments = treaments;
     }
 
 }
