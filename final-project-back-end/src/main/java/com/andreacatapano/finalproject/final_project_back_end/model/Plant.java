@@ -1,4 +1,4 @@
-package com.andreacatapano.finalproject.model;
+package com.andreacatapano.finalproject.final_project_back_end.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

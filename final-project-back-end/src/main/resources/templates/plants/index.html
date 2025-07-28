@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Gestione Piante - Plant Nursery
+      </h1>
+
+      <div class="container">
+        <ul class="list-group">
+          <li th:each="plant : ${plants}" class="list-group-item row">
+            <span class="col-4" th:text="${plant.name}"></span>
+            <span class="col-4"></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
