@@ -13,6 +13,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
@@ -59,8 +62,12 @@ public class Plant implements Serializable {
     private String maximumHeight;
 
     @OneToMany(mappedBy = "plant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Treatment> treatments;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "piante_caratteristiche", joinColumns = @JoinColumn(name = "plant_id"), inverseJoinColumns = @JoinColumn(name = "caratteristica_id"))
+    @JsonIgnore
+    private List<Characteristic> characteristics;
 
     public Plant() {
     }
@@ -135,6 +142,14 @@ public class Plant implements Serializable {
 
     public void setTreatments(List<Treatment> treatments) {
         this.treatments = treatments;
+    }
+
+    public List<Characteristic> getCharacteristics() {
+        return characteristics;
+    }
+
+    public void setCharacteristics(List<Characteristic> characteristics) {
+        this.characteristics = characteristics;
     }
 
 }

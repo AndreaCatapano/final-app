@@ -12,7 +12,6 @@
 
       <div th:object="${plant}" class="container">
         <div class="card shadow-lg">
-          <!-- Header della card -->
           <div class="card-header bg-success text-white text-center">
             <h2 class="mb-1" th:text="*{name}"></h2>
             <h6 class="fst-italic opacity-75" th:text="*{scientificName}"></h6>
@@ -20,7 +19,6 @@
 
           <div class="card-body">
             <div class="row">
-              <!-- Colonna sinistra: Info -->
               <div class="col-lg-6">
                 <div class="mb-4">
                   <h5 class="text-success mb-3">
@@ -47,9 +45,31 @@
                     €<span th:text="*{price}"></span>
                   </h4>
                 </div>
+
+                <!-- Blocco caratteristiche  -->
+                <div class="mb-4">
+                  <h6 class="text-muted mb-3">
+                    <i class="bi bi-tags"></i> Caratteristiche
+                  </h6>
+                  <div
+                    th:if="*{characteristics != null and !characteristics.empty}"
+                  >
+                    <div class="d-flex flex-wrap gap-2">
+                      <div
+                        th:replace="fragments/characteristic-tag :: characteristics-tags(${plant.characteristics})"
+                      ></div>
+                    </div>
+                  </div>
+                  <div
+                    th:unless="*{characteristics != null and !characteristics.empty}"
+                  >
+                    <p class="text-muted small">
+                      Nessuna caratteristica disponibile per questa pianta
+                    </p>
+                  </div>
+                </div>
               </div>
 
-              <!-- Colonna destra: Immagine -->
               <div class="col-lg-6 text-center">
                 <div class="position-relative">
                   <img
@@ -71,9 +91,12 @@
           </div>
         </div>
 
-        <th:block
-          th:insert="fragments/treatments-section :: common-treatments"
-        ></th:block>
+        <!-- Sezione trattamenti -->
+        <div class="mt-4">
+          <th:block
+            th:insert="fragments/treatments-section :: common-treatments"
+          ></th:block>
+        </div>
       </div>
     </div>
   </body>

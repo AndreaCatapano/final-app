@@ -8,8 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.andreacatapano.finalproject.final_project_back_end.model.Characteristic;
 import com.andreacatapano.finalproject.final_project_back_end.model.Plant;
-import com.andreacatapano.finalproject.final_project_back_end.model.Treatment;
 import com.andreacatapano.finalproject.final_project_back_end.service.PlantService;
 
 import jakarta.validation.Valid;
@@ -36,6 +36,9 @@ public class PlantController {
     @GetMapping("/{slug}")
     public String show(@PathVariable String slug, Model model) {
         Plant plant = plantService.findBySlug(slug);
+        if (plant != null && plant.getCharacteristics() != null) {
+            plant.getCharacteristics().forEach(c -> System.out.println("Caratteristica: " + c.getName()));
+        }
         model.addAttribute("plant", plant);
         return "plants/show";
     }
@@ -64,10 +67,11 @@ public class PlantController {
     @GetMapping("/update/{slug}")
     public String getUpdate(@PathVariable String slug, Model model) {
         Plant plant = plantService.findBySlug(slug);
+        List<Characteristic> characteristics = plantService.findCharacteristics();
 
         if (plant != null) {
             model.addAttribute("plant", plant);
-
+            model.addAttribute("characteristics", characteristics);
             return "plants/update";
         }
 
@@ -78,6 +82,8 @@ public class PlantController {
     public String update(@Valid @ModelAttribute("plant") Plant formPlant, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            List<Characteristic> characteristics = plantService.findCharacteristics();
+            model.addAttribute("characteristics", characteristics);
             model.addAttribute("plant", formPlant);
             return "/plants/create";
         }
