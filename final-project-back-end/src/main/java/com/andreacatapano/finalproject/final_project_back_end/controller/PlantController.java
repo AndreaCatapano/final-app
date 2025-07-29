@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.andreacatapano.finalproject.final_project_back_end.model.Plant;
+import com.andreacatapano.finalproject.final_project_back_end.model.Treatment;
 import com.andreacatapano.finalproject.final_project_back_end.service.PlantService;
 
 import jakarta.validation.Valid;

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -57,9 +58,9 @@ public class Plant implements Serializable {
     @Size(max = 50)
     private String maximumHeight;
 
-    @OneToMany(mappedBy = "plant", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "plant", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Treatment> treaments;
+    private List<Treatment> treatments;
 
     public Plant() {
     }
@@ -128,12 +129,12 @@ public class Plant implements Serializable {
         this.maximumHeight = maximumHeight;
     }
 
-    public List<Treatment> getTreaments() {
-        return treaments;
+    public List<Treatment> getTreatments() {
+        return treatments;
     }
 
-    public void setTreaments(List<Treatment> treaments) {
-        this.treaments = treaments;
+    public void setTreatments(List<Treatment> treatments) {
+        this.treatments = treatments;
     }
 
 }

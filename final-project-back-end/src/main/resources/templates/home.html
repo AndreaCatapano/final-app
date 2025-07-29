@@ -76,8 +76,7 @@
 
                 <div sec:authorize="isAuthenticated()">
                   <p class="lead text-muted mb-4">
-                    Ciao <strong sec:authentication="name"></strong>! Grazie per
-                    essere parte della nostra comunità verde.
+                    Ciao <strong sec:authentication="name"></strong>!
                   </p>
                   <div class="alert alert-info">
                     <i class="bi bi-info-circle me-2"></i>
@@ -107,7 +106,5 @@
         </div>
       </div>
     </div>
-
-    <th:block th:insert="fragments/head :: common-links"></th:block>
   </body>
 </html>
