@@ -6,10 +6,20 @@
     <div th:fragment="common-treatments" class="border-bottom py-2 mb-4">
       <div class="container mt-4">
         <div class="card shadow">
-          <div class="card-header bg-success text-white">
+          <div
+            class="card-header bg-success text-white d-flex align-items-center justify-content-between"
+          >
             <h4 class="mb-0">
               <i class="bi bi-heart-pulse"></i> Consigli di Cura
             </h4>
+
+            <a
+              sec:authorize="hasAuthority('ADMIN')"
+              class="btn btn-light border my-3"
+              th:href="@{/treatments/create(plantslug=${plant.slug})}"
+            >
+              Nuovo Trattamento
+            </a>
           </div>
 
           <div class="card-body">
