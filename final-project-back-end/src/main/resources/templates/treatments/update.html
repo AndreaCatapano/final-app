@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Modifica un trattamento - Plant Nursery
+      </h1>
+
+      <div class="text-center mb-4">
+        <h5 class="text-muted">
+          Trattamento per:
+          <span class="text-success" th:text="${plant.name}"></span>
+        </h5>
+      </div>
+
+      <div class="container">
+        <main class="container my-3">
+          <form
+            id="treatment-form"
+            th:object="${treatment}"
+            th:action="@{/treatments/update/{id}(id=${treatment.id})}"
+            method="post"
+          >
+            <input type="hidden" name="plantslug" th:value="${plant.slug}" />
+
+            <div class="mb-3">
+              <label for="typeOfTreatment" class="form-label">
+                Tipo di trattamento <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="typeOfTreatment"
+                th:field="*{typeOfTreatment}"
+                placeholder="Es: Innaffiatura, Potatura, Concimazione"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('typeOfTreatment')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('typeOfTreatment')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="frequency" class="form-label">
+                Frequenza <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="frequency"
+                th:field="*{frequency}"
+                placeholder="Es: 2 volte a settimana, Una volta al mese"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('frequency')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('frequency')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">
+                Descrizione <span class="text-danger">*</span>
+              </label>
+              <textarea
+                class="form-control"
+                id="description"
+                th:field="*{description}"
+                rows="4"
+                placeholder="Descrivi come eseguire il trattamento, strumenti necessari, precauzioni..."
+                th:errorClass="is-invalid"
+              ></textarea>
+              <div
+                th:if="${#fields.hasErrors('description')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('description')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="periodOfTheYear" class="form-label">
+                Periodo dell'anno <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="periodOfTheYear"
+                th:field="*{periodOfTheYear}"
+                placeholder="Es: Primavera, Estate, Autunno, Inverno, Tutto l'anno"
+                th:errorClass="is-invalid"
+              />
+              <div
+                th:if="${#fields.hasErrors('periodOfTheYear')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('periodOfTheYear')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="note" class="form-label">Note aggiuntive</label>
+              <textarea
+                class="form-control"
+                id="note"
+                th:field="*{note}"
+                rows="3"
+                placeholder="Aggiungi eventuali note, consigli o precauzioni speciali..."
+                th:errorClass="is-invalid"
+              ></textarea>
+              <div
+                th:if="${#fields.hasErrors('note')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('note')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a
+                th:href="@{/plants/{slug}(slug=${plant.slug})}"
+                class="btn btn-outline-secondary me-md-2"
+              >
+                <i class="bi bi-arrow-left"></i> Annulla
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Salva Trattamento
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

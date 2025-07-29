@@ -47,6 +47,15 @@ public class TreatmentService {
         treatmentRepository.delete(treatment);
     }
 
+    public void deleteById(Integer id) {
+        Treatment treatment = treatmentRepository.findById(id).orElseThrow();
+
+        Plant plant = treatment.getPlant();
+        plant.getTreatments().remove(treatment);
+
+        treatmentRepository.deleteById(id);
+    }
+
     public Plant getPlantBySlug(String slug) {
         return plantRepository.findBySlug(slug);
     }

@@ -58,6 +58,24 @@
                     <strong>Periodo:</strong>
                     <span th:text="${treatment.periodOfTheYear}"></span>
                   </small>
+
+                  <a
+                    sec:authorize="hasAuthority('ADMIN')"
+                    class="btn btn-warning border"
+                    th:href="@{/treatments/update/{id}(id=${treatment.id}, plantslug=${plant.slug})}"
+                  >
+                    Modifica
+                  </a>
+                  <form
+                    sec:authorize="hasAuthority('ADMIN')"
+                    th:action="@{/treatments/delete/{id}(id=${treatment.id})}"
+                    method="post"
+                    onsubmit="return confirm('Sei sicuro di voler eliminare questo trattamento?')"
+                  >
+                    <button type="submit" class="btn btn-danger border">
+                      Cancella
+                    </button>
+                  </form>
                 </li>
               </ul>
             </div>

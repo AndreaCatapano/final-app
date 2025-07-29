@@ -1,5 +1,7 @@
 package com.andreacatapano.finalproject.final_project_back_end.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,6 +59,55 @@ public class TreatmentController {
         formTreatment.setPlant(plant);
 
         treatmentService.create(formTreatment);
+
+        return "redirect:/plants/" + plantSlug;
+    }
+
+    @GetMapping("/update/{id}")
+    public String getUpate(@PathVariable Integer id, @RequestParam("plantslug") String plantSlug, Model model) {
+        Plant plant = plantService.findBySlug(plantSlug);
+        Optional<Treatment> treatmentAttempt = treatmentService.findById(id);
+
+        if (treatmentAttempt.isEmpty()) {
+            model.addAttribute("plant", plant);
+            return "treatments/update";
+        }
+
+        Treatment treatment = treatmentAttempt.get();
+
+        model.addAttribute("plant", plant);
+        model.addAttribute("treatment", treatment);
+
+        return "treatments/update";
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@Valid @PathVariable Integer id, @ModelAttribute("treatment") Treatment formTreatment,
+            @RequestParam("plantslug") String plantSlug, BindingResult bindingResult,
+            Model model) {
+
+        Plant plant = plantService.findBySlug(plantSlug);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("plant", plant);
+            model.addAttribute("treatment", formTreatment);
+            return "treatments/update";
+        }
+
+        formTreatment.setId(id);
+        formTreatment.setPlant(plant);
+
+        treatmentService.update(formTreatment);
+
+        return "redirect:/plants/" + plantSlug;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String confirmDelete(@PathVariable Integer id) {
+        Treatment treatment = treatmentService.findById(id).orElseThrow();
+        String plantSlug = treatment.getPlant().getSlug();
+
+        treatmentService.deleteById(id);
 
         return "redirect:/plants/" + plantSlug;
     }
