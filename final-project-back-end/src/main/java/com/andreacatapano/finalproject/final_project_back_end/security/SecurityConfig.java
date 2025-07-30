@@ -22,11 +22,13 @@ public class SecurityConfig {
 
                 // Solo ADMIN
                 .requestMatchers(
-                        "/plants/create", "/plants/update/**", "/plants/delete/**")
+                        "/plants/create", "/plants/update/**", "/plants/delete/**", "/treatments/create",
+                        "/treatments/update/**",
+                        "/treatments/delete/**")
                 .hasAuthority("ADMIN")
                 // USER e ADMIN
                 .requestMatchers(
-                        "/plants/**")
+                        "/plants/**, treatments/**")
                 .hasAnyAuthority("USER", "ADMIN")
 
                 // Tutto il resto richiede autenticazione

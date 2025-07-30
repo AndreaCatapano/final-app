@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Gestione Caratteristiche - Plant Nursery
+      </h1>
+
+      <a
+        sec:authorize="hasAuthority('ADMIN')"
+        class="btn btn-light border my-3"
+        th:href="@{/characteristic/create}"
+      >
+        Nuova Caratteristica
+      </a>
+
+      <div class="container">
+        <ul class="list-group">
+          <li
+            th:each="characteristic : ${characteristics}"
+            class="list-group-item"
+          >
+            <div class="row align-items-center">
+              <div class="col-4">
+                <span th:text="${characteristic.name}"></span>
+              </div>
+
+              <div class="col-4 text-center">
+                <span
+                  class="badge bg-success border"
+                  th:text="${characteristic.category}"
+                ></span>
+              </div>
+
+              <div class="col-4">
+                <div
+                  class="d-flex justify-content-end align-items-center gap-2"
+                >
+                  <a
+                    class="btn btn-light border"
+                    th:href="@{/characteristics/{id}(id=${characteristic.id})}"
+                  >
+                    Mostra
+                  </a>
+                  <a
+                    sec:authorize="hasAuthority('ADMIN')"
+                    class="btn btn-warning border"
+                    th:href="@{/characteristics/update/{id}(id=${characteristic.id})}"
+                  >
+                    Modifica
+                  </a>
+                  <form
+                    sec:authorize="hasAuthority('ADMIN')"
+                    action="#"
+                    th:action="@{'/characteristics/delete/{id}id=${characteristic.id}}"
+                    method="post"
+                    class="d-inline"
+                  >
+                    <button class="btn btn-danger border">Cancella</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer text-center">
+        <a href="/" class="btn btn-outline-success mt-4">
+          <i class="bi bi-arrow-left"></i> Torna alla Home
+        </a>
+      </div>
+    </div>
+
+    <th:block th:insert="fragments/head :: common-links"></th:block>
+  </body>
+</html>
