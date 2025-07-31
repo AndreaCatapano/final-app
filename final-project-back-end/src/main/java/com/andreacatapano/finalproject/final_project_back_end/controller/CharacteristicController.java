@@ -1,6 +1,5 @@
 package com.andreacatapano.finalproject.final_project_back_end.controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 @RequestMapping("/characteristics")
@@ -101,7 +98,7 @@ public class CharacteristicController {
         Optional<Characteristic> characteristicAttempt = characteristicsService.findById(id);
 
         if (characteristicAttempt.isEmpty()) {
-            System.out.println("L'elemento non è stato trovato o è stato già cancellato");
+            System.out.println("L'elemento non è stato trovato o è stato già cancellato ");
             return "redirect:/characteristics";
         }
 

@@ -79,18 +79,21 @@ public class PlantController {
     }
 
     @PostMapping("/update/{slug}")
-    public String update(@Valid @ModelAttribute("plant") Plant formPlant, BindingResult bindingResult, Model model) {
+    public String update(@Valid @ModelAttribute("plant") Plant formPlant,
+            BindingResult bindingResult,
+            @PathVariable String slug,
+            Model model) {
 
         if (bindingResult.hasErrors()) {
             List<Characteristic> characteristics = plantService.findCharacteristics();
             model.addAttribute("characteristics", characteristics);
-            model.addAttribute("plant", formPlant);
-            return "/plants/create";
+            return "plants/update";
         }
 
+        formPlant.setSlug(slug);
         plantService.update(formPlant);
 
-        return "redirect:/plants";
+        return "redirect:/plants/" + slug;
     }
 
     @PostMapping("/delete/{slug}")

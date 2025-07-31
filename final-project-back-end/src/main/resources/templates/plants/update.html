@@ -24,7 +24,6 @@
             th:action="@{/plants/update/{slug}(slug=${plant.slug})}"
             method="post"
           >
-            <!-- Campo hidden per ID (importante!) -->
             <input type="hidden" th:field="*{id}" />
             <input type="hidden" th:field="*{slug}" />
 
@@ -178,6 +177,70 @@
                     th:text="${err}"
                   ></li>
                 </ul>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">
+                <i class="bi bi-tags"></i> Caratteristiche della Pianta
+              </label>
+              <div class="card">
+                <div class="card-body">
+                  <div
+                    class="row"
+                    th:if="${characteristics != null and not #lists.isEmpty(characteristics)}"
+                  >
+                    <div
+                      class="col-md-6 col-lg-4 mb-3"
+                      th:each="characteristic : ${characteristics}"
+                    >
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          th:value="${characteristic.id}"
+                          th:field="*{characteristics}"
+                          th:id="'char_' + ${characteristic.id}"
+                        />
+                        <label
+                          class="form-check-label"
+                          th:for="'char_' + ${characteristic.id}"
+                        >
+                          <strong th:text="${characteristic.name}"
+                            >Nome Caratteristica</strong
+                          >
+                          <br />
+                          <small class="text-muted">
+                            <span
+                              class="badge bg-info me-1"
+                              th:text="${characteristic.category}"
+                              >Categoria</span
+                            >
+                            <br />
+                          </small>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    th:if="${characteristics == null or #lists.isEmpty(characteristics)}"
+                    class="text-muted text-center py-3"
+                  >
+                    <i class="bi bi-info-circle"></i>
+                    Nessuna caratteristica disponibile.
+                    <a
+                      href="/characteristics/create"
+                      class="btn btn-sm btn-outline-primary ms-2"
+                    >
+                      Crea nuova caratteristica
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="form-text">
+                <i class="bi bi-lightbulb"></i>
+                Seleziona le caratteristiche che meglio descrivono questa pianta
               </div>
             </div>
 
