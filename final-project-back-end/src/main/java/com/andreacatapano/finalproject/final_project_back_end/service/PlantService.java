@@ -23,8 +23,24 @@ public class PlantService {
         return plantRepository.findAll();
     }
 
+    public List<Plant> finddAllNameAsc() {
+        return plantRepository.findAllByOrderByNameAsc();
+    }
+
+    public List<Plant> finddAllNameADesc() {
+        return plantRepository.findAllByOrderByNameDesc();
+    }
+
+    public List<Plant> findByCharacteristic(Characteristic characteristic) {
+        return plantRepository.findByCharacteristics(characteristic);
+    }
+
     public Plant findBySlug(String slug) {
         return plantRepository.findBySlug(slug);
+    }
+
+    public Plant findByName(String name) {
+        return plantRepository.findByName(name);
     }
 
     public Plant create(Plant plant) {
