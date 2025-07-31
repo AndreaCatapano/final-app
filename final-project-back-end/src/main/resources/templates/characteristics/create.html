@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head :: common-head"></head>
+
+  <body class="border">
+    <header th:insert="fragments/header :: common-header"></header>
+
+    <div class="container mb-5">
+      <h1 class="text-center text-success my-3">
+        Nuova Caratteristica - Plant Nursery
+      </h1>
+
+      <div class="container">
+        <main class="container my-3">
+          <form
+            id="characteristic-form"
+            th:object="${characteristic}"
+            th:action="@{/characteristics/create}"
+            method="post"
+          >
+            <div class="mb-3">
+              <label for="name" class="form-label">
+                Nome <span class="text-danger">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                th:field="*{name}"
+                placeholder="Es: Resistente al freddo, Fioritura prolungata, Fogliame decorativo"
+                th:errorClass="is-invalid"
+                maxlength="100"
+              />
+              <div class="form-text">Massimo 100 caratteri</div>
+              <div
+                th:if="${#fields.hasErrors('name')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('name')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="category" class="form-label">
+                Categoria <span class="text-danger">*</span>
+              </label>
+              <select
+                class="form-select"
+                id="category"
+                th:field="*{category}"
+                th:errorClass="is-invalid"
+              >
+                <option value="">Seleziona una categoria</option>
+                <option value="Resistenza">Resistenza</option>
+                <option value="Fioritura">Fioritura</option>
+                <option value="Fogliame">Fogliame</option>
+                <option value="Crescita">Crescita</option>
+                <option value="Habitat">Habitat</option>
+                <option value="Cura">Cura</option>
+                <option value="Estetica">Estetica</option>
+                <option value="Funzionale">Funzionale</option>
+              </select>
+              <div
+                th:if="${#fields.hasErrors('category')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('category')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="description" class="form-label">
+                Descrizione <span class="text-danger">*</span>
+              </label>
+              <textarea
+                class="form-control"
+                id="description"
+                th:field="*{description}"
+                rows="4"
+                placeholder="Descrivi dettagliatamente questa caratteristica della pianta..."
+                th:errorClass="is-invalid"
+                maxlength="300"
+              ></textarea>
+              <div class="form-text">Massimo 300 caratteri</div>
+              <div
+                th:if="${#fields.hasErrors('description')}"
+                class="invalid-feedback"
+              >
+                <ul class="mb-0">
+                  <li
+                    th:each="err : ${#fields.errors('description')}"
+                    th:text="${err}"
+                  ></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <a
+                href="/characteristics"
+                class="btn btn-outline-secondary me-md-2"
+              >
+                <i class="bi bi-arrow-left"></i> Annulla
+              </a>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Salva Caratteristica
+              </button>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

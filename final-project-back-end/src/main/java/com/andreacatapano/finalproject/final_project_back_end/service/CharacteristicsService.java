@@ -30,4 +30,21 @@ public class CharacteristicsService {
                 .orElseThrow(() -> new EntityNotFoundException("Caratteristica con ID " + id + " non trovata"));
     }
 
+    public Characteristic ceate(Characteristic characteristic) {
+        return characteristicRepository.save(characteristic);
+    }
+
+    public Characteristic update(Characteristic characteristic) {
+        return characteristicRepository.save(characteristic);
+    }
+
+    public void delete(Characteristic characteristic) {
+        characteristicRepository.delete(characteristic);
+    }
+
+    public void deleteById(Integer id) {
+        Optional<Characteristic> characteristicAttempt = characteristicRepository.findById(id);
+        Characteristic characteristic = characteristicAttempt.get();
+        characteristicRepository.delete(characteristic);
+    }
 }
