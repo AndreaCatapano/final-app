@@ -13,6 +13,8 @@ public interface PlantRepository extends JpaRepository<Plant, Integer> {
 
     Plant findByName(String name);
 
+    List<Plant> findByNameContainingIgnoreCase(String name);
+
     List<Plant> findAllByOrderByNameAsc();
 
     List<Plant> findAllByOrderByNameDesc();

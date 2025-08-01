@@ -17,7 +17,7 @@ import com.andreacatapano.finalproject.final_project_back_end.service.PlantServi
 
 @RestController
 @RequestMapping("/api/plants")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin
 public class PlantRestController {
 
     @Autowired
@@ -61,6 +61,11 @@ public class PlantRestController {
     @GetMapping("name/{name}")
     public Plant SearchByName(@PathVariable String name) {
         return plantService.findByName(name);
+    }
+
+    @GetMapping("search/{searchTerm}")
+    public List<Plant> searchByNameContaining(@PathVariable String searchTerm) {
+        return plantService.findByNameContaining(searchTerm);
     }
 
 }

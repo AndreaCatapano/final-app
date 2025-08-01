@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import PlantCard from "../../Components/PlantCard/Card.jsx";
+import PlantCard from "../../Components/PlantCard/Card";
+import PlantSearch from "../../Components/PlantsSearch/Search";
 import "./Plants.css";
 
 function Plants() {
@@ -11,6 +12,11 @@ function Plants() {
   const apiUrl = "http://localhost:8080/api/plants";
 
   useEffect(() => {
+    loadAllPlants();
+  }, []);
+
+  const loadAllPlants = () => {
+    setLoading(true);
     axios
       .get(apiUrl)
       .then((res) => {
@@ -22,19 +28,57 @@ function Plants() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  };
+
+  // Callback per gestire i risultati della ricerca
+  const handleSearchResults = (results) => {
+    setPlants(results);
+  };
+
+  // Callback per gestire lo stato di loading
+  const handleLoadingState = (isLoading) => {
+    setLoading(isLoading);
+  };
+
+  // Callback per gestire gli errori
+  const handleErrorState = (errorMessage) => {
+    setError(errorMessage);
+  };
 
   if (loading) return <div className="loading">Loading...</div>;
-  if (error) return <div className="error">Errore: {error}</div>;
 
   return (
     <div className="plants-page">
       <div className="plants-container">
         <h1 className="plants-title">Le Nostre Piante</h1>
-        <div className="plants-grid">
-          {plants.map((plant) => (
-            <PlantCard key={plant.id} plant={plant} />
-          ))}
+
+        <PlantSearch
+          onResults={handleSearchResults}
+          onLoading={handleLoadingState}
+          onError={handleErrorState}
+        />
+
+        <div className="plants-results">
+          <p className="results-count">
+            {plants.length}{" "}
+            {plants.length === 1 ? "pianta trovata" : "piante trovate"}
+          </p>
+
+          <div className="plants-grid">
+            {plants.length > 0
+              ? plants.map((plant) => (
+                  <PlantCard key={plant.id} plant={plant} />
+                ))
+              : !loading && (
+                  <div className="no-results">
+                    <p>
+                      {error
+                        ? error
+                        : "Nessuna pianta trovata con i criteri di ricerca selezionati."}
+                    </p>
+                  </div>
+                )}
+          </div>
         </div>
       </div>
     </div>

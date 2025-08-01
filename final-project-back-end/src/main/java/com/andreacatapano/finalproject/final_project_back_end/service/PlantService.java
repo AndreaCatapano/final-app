@@ -43,6 +43,10 @@ public class PlantService {
         return plantRepository.findByName(name);
     }
 
+    public List<Plant> findByNameContaining(String name) {
+        return plantRepository.findByNameContainingIgnoreCase(name);
+    }
+
     public Plant create(Plant plant) {
         return plantRepository.save(plant);
     }
