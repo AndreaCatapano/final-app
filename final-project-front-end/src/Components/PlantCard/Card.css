@@ -1,0 +1,205 @@
+/* ================================
+   PLANT CARD COMPONENT
+   ================================ */
+
+.plant-card {
+    border: 1px solid black;
+    background-color: white;
+    transition: all ease-in-out 300ms;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.plant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   IMAGE SECTION
+   ================================ */
+
+.plant-card-image {
+    height: 180px;
+    border-bottom: 1px solid black;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8;
+    position: relative;
+}
+
+.plant-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform ease-in-out 600ms;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.plant-card:hover .plant-card-image img {
+    transform: scale(1.02);
+}
+
+.plant-card-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #666;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ================================
+   CONTENT SECTION
+   ================================ */
+
+.plant-card-content {
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
+.plant-card-header {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+}
+
+.plant-card-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.3rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.plant-card-scientific {
+    font-style: italic;
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* ================================
+   DETAILS SECTION
+   ================================ */
+
+.plant-card-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.plant-card-height {
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.plant-card-description {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: #555;
+    margin: 0.5rem 0 0 0;
+}
+
+/* ================================
+   FOOTER SECTION
+   ================================ */
+
+.plant-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid black;
+    padding-top: 1rem;
+    margin-top: auto;
+}
+
+.plant-card-price {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: green;
+}
+
+.plant-card-link {
+    background-color: transparent;
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid black;
+    transition: all ease-in-out 300ms;
+    letter-spacing: 0.5px;
+}
+
+.plant-card-link:hover {
+    background-color: black;
+    color: white;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media screen and (max-width: 576px) {
+    .plant-card {
+        max-width: 100%;
+    }
+
+    .plant-card-image {
+        height: 160px;
+    }
+
+    .plant-card-content {
+        padding: 1rem;
+    }
+
+    .plant-card-name {
+        font-size: 1.1rem;
+    }
+
+    .plant-card-footer {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: stretch;
+    }
+
+    .plant-card-link {
+        text-align: center;
+        width: 100%;
+    }
+
+    .plant-card-price {
+        text-align: center;
+        font-size: 1.2rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .plant-card-content {
+        padding: 0.8rem;
+    }
+
+    .plant-card-name {
+        font-size: 1rem;
+    }
+
+    .plant-card-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}

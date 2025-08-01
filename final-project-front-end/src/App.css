@@ -1,0 +1,56 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   TYPOGRAPHY 
+   ================================ */
+
+h2,
+h3,
+p,
+li {
+  font-family: "Roboto", sans-serif;
+}
+
+a,
+h1,
+h4 {
+  font-family: "Funnel Display", sans-serif;
+}
+
+h1,
+h3 {
+  font-size: 1.875rem;
+  font-weight: 500;
+}
+
+h2 {
+  font-size: 2.25rem;
+  font-weight: 500;
+}
+
+h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+p,
+li {
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+nav a {
+  font-size: 1.875rem;
+  font-weight: 500;
+}

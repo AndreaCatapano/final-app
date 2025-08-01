@@ -1,0 +1,107 @@
+/* ================================
+   PLANTS PAGE LAYOUT
+   ================================ */
+
+.plants-page {
+    min-height: 100vh;
+    background-color: #f8f8f8;
+    padding: 2rem 0;
+}
+
+.plants-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.plants-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+    color: black;
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
+}
+
+.plants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* ================================
+   LOADING & ERROR STATES
+   ================================ */
+
+.loading,
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.loading {
+    color: #666;
+}
+
+.error {
+    color: #d32f2f;
+    background-color: #ffebee;
+    border: 1px solid #d32f2f;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 2rem;
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+@media screen and (max-width: 807px) {
+    .plants-container {
+        padding: 0 1rem;
+    }
+
+    .plants-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .plants-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .plants-page {
+        padding: 1rem 0;
+    }
+
+    .plants-container {
+        padding: 0 0.5rem;
+    }
+
+    .plants-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .plants-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .plants-title {
+        font-size: 7vw;
+    }
+}
