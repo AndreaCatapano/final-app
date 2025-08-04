@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import PlantCard from "../../Components/PlantCard/Card";
+import HomePlantCard from "../../Components/PlantCard/Card";
 import "./Home.css";
 
 function Homepage() {
@@ -98,7 +98,7 @@ function Homepage() {
     return (
       <div className="homepage">
         <div className="homepage-container">
-          <div className="loading">Caricamento homepage...</div>
+          <div className="loading">Caricamento...</div>
         </div>
       </div>
     );
@@ -109,7 +109,7 @@ function Homepage() {
       <div className="homepage">
         <div className="homepage-container">
           <div className="error-section">
-            <h2>Errore</h2>
+            <h2>Qualcosa è andato storto</h2>
             <p>{error}</p>
             <Link to="/plants" className="cta-button">
               Vai alle piante
@@ -123,18 +123,22 @@ function Homepage() {
   return (
     <div className="homepage">
       <div className="homepage-container">
-        {/* Hero Section - Consigliati per te */}
+        {/* Hero Section - Layout asimmetrico */}
         <section className="hero-section">
           <div className="section-header">
-            <h1 className="section-title">Consigliati per Te</h1>
-            <p className="section-subtitle">
-              Scopri le nostre piante selezionate
-            </p>
+            <div>
+              <h1 className="section-title">Consigliati per Te</h1>
+            </div>
+            <div>
+              <p className="section-subtitle">
+                Piante selezionate per trasformare i tuoi spazi in oasi verdi.
+              </p>
+            </div>
           </div>
 
           <div className="recommended-grid">
             {recommendedPlants.map((plant) => (
-              <PlantCard key={plant.id} plant={plant} />
+              <HomePlantCard key={plant.id} plant={plant} variant="hero" />
             ))}
           </div>
 
@@ -145,74 +149,90 @@ function Homepage() {
           </div>
         </section>
 
-        {/* Category Carousel Section */}
+        {/* Category Carousel Section - Enhanced */}
         {categoryPlants.length > 0 && (
           <section className="carousel-section">
             <div className="section-header">
-              <h2 className="section-title">
-                {selectedCategory?.name || "Selezione Speciale"}
-              </h2>
-              <p className="section-subtitle">Scorri per vedere di più</p>
+              <div>
+                <h2 className="section-title">
+                  {selectedCategory?.name || "Selezione Speciale"}
+                </h2>
+              </div>
+              <div>
+                <p className="section-subtitle">
+                  Una collezione curata per ogni occasione
+                </p>
+              </div>
             </div>
 
             <div className="carousel-container">
-              <button
-                className="carousel-button prev"
-                onClick={prevSlide}
-                disabled={categoryPlants.length <= 1}
-              >
-                ←
-              </button>
-
               <div className="carousel-wrapper">
                 <div
                   className="carousel-track"
-                  style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
+                  style={{
+                    transform: `translateX(-${carouselIndex * 100}%)`,
+                  }}
                 >
                   {categoryPlants.map((plant) => (
                     <div key={plant.id} className="carousel-slide">
-                      <PlantCard plant={plant} />
+                      <HomePlantCard plant={plant} variant="carousel" />
                     </div>
                   ))}
                 </div>
               </div>
 
-              <button
-                className="carousel-button next"
-                onClick={nextSlide}
-                disabled={categoryPlants.length <= 1}
-              >
-                →
-              </button>
-            </div>
-
-            {/* Carousel Indicators */}
-            {categoryPlants.length > 1 && (
-              <div className="carousel-indicators">
-                {categoryPlants.map((_, index) => (
+              <div className="carousel-navigation">
+                <div className="carousel-controls">
                   <button
-                    key={index}
-                    className={`indicator ${
-                      index === carouselIndex ? "active" : ""
-                    }`}
-                    onClick={() => goToSlide(index)}
-                  />
-                ))}
+                    className="carousel-button"
+                    onClick={prevSlide}
+                    disabled={categoryPlants.length <= 1}
+                    aria-label="Pianta precedente"
+                  >
+                    ←
+                  </button>
+                  <button
+                    className="carousel-button"
+                    onClick={nextSlide}
+                    disabled={categoryPlants.length <= 1}
+                    aria-label="Pianta successiva"
+                  >
+                    →
+                  </button>
+                </div>
+
+                {/* Indicators */}
+                {categoryPlants.length > 1 && (
+                  <div className="carousel-indicators">
+                    {categoryPlants.map((_, index) => (
+                      <button
+                        key={index}
+                        className={`indicator ${
+                          index === carouselIndex ? "active" : ""
+                        }`}
+                        onClick={() => goToSlide(index)}
+                        aria-label={`Vai alla pianta ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </section>
         )}
 
-        {/* Cheap Plants Section */}
+        {/* Cheap Plants Section - Layout offset */}
         <section className="cheap-section">
           <div className="section-header">
             <h2 className="section-title">Prezzi Convenienti</h2>
-            <p className="section-subtitle">Le 6 piante più economiche</p>
+            <p className="section-subtitle">
+              Qualità eccezionale a prezzi accessibili
+            </p>
           </div>
 
           <div className="cheap-grid">
             {cheapPlants.map((plant) => (
-              <PlantCard key={plant.id} plant={plant} />
+              <HomePlantCard key={plant.id} plant={plant} variant="cheap" />
             ))}
           </div>
 
